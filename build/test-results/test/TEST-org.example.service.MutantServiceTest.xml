@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.service.MutantServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-11-26T17:57:59.899Z" hostname="DESKTOP-7FJCMF7" time="0.225">
-  <properties/>
-  <testcase name="shouldReturnCachedResult_WhenDnaAlreadyExists()" classname="org.example.service.MutantServiceTest" time="0.221"/>
-  <testcase name="shouldAnalyzeAndSave_WhenDnaIsNew()" classname="org.example.service.MutantServiceTest" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
