@@ -130,7 +130,7 @@ sequenceDiagram
 
 -----
 
-## 💻 Ejecución Local
+## Ejecución Local
 
 Si deseas correr el proyecto en tu entorno local:
 
@@ -159,7 +159,7 @@ Si deseas correr el proyecto en tu entorno local:
 
 -----
 
-## 🧪 Ejecución de Tests y Cobertura
+## Ejecución de Tests y Cobertura
 
 [cite\_start]El proyecto cuenta con una cobertura de código del **92%**, superando el requisito del 80%[cite: 31, 130].
 
@@ -177,7 +177,7 @@ El reporte detallado se generará en: `build/reports/jacoco/test/html/index.html
 
 ```
 
-### 📝 Instrucciones finales antes de hacer Commit:
+### Instrucciones finales antes de hacer Commit:
 
 1.  Reemplaza `[TU_URL_DE_RENDER]` con la URL real que obtengas al desplegar en Render (Ej: `https://mutant-api-xyz.onrender.com`).
 2.  Reemplaza `https://github.com/TU_USUARIO/mutantes-api.git` con el link real de tu repositorio.
@@ -185,3 +185,4 @@ El reporte detallado se generará en: `build/reports/jacoco/test/html/index.html
 
 ¡Con esto tu proyecto está **100% terminado** y documentado profesionalmente! 🚀
 ```
+
