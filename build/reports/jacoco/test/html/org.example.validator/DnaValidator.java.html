@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DnaValidator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ExamenMercado</a> &gt; <a href="index.source.html" class="el_package">org.example.validator</a> &gt; <span class="el_source">DnaValidator.java</span></div><h1>DnaValidator.java</h1><pre class="source lang-java linenums">package org.example.validator;
+
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
+<span class="fc" id="L6">public class DnaValidator implements ConstraintValidator&lt;ValidDna, String[]&gt; {</span>
+
+    @Override
+    public void initialize(ValidDna constraintAnnotation) {
+        // Inicialización si fuera necesaria
+<span class="fc" id="L11">    }</span>
+
+    @Override
+    public boolean isValid(String[] dna, ConstraintValidatorContext context) {
+        // 1. Validar que no sea nulo
+<span class="pc bpc" id="L16" title="1 of 2 branches missed.">        if (dna == null) {</span>
+<span class="nc" id="L17">            return false;</span>
+        }
+
+<span class="fc" id="L20">        int n = dna.length;</span>
+        // 2. Validar que no esté vacío
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if (n == 0) {</span>
+<span class="nc" id="L23">            return false;</span>
+        }
+
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (String row : dna) {</span>
+            // 3. Validar que la fila no sea nula
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">            if (row == null) {</span>
+<span class="nc" id="L29">                return false;</span>
+            }
+
+            // 4. Validar que sea NxN (cuadrada)
+<span class="fc bfc" id="L33" title="All 2 branches covered.">            if (row.length() != n) {</span>
+<span class="fc" id="L34">                return false;</span>
+            }
+
+            // 5. Validar caracteres (Solo A, T, C, G)
+            // Explicación regex: ^ inicio, [ATCG]+ uno o más de estos, $ fin
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">            if (!row.matches(&quot;^[ATCG]+$&quot;)) {</span>
+<span class="nc" id="L40">                return false;</span>
+            }
+        }
+
+<span class="fc" id="L44">        return true; // Si pasa todo, es válido</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

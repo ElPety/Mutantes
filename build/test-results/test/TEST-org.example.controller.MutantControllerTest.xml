@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.controller.MutantControllerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-11-26T17:57:59.454Z" hostname="DESKTOP-7FJCMF7" time="0.424">
+  <properties/>
+  <testcase name="shouldReturnBadRequest_WhenDnaIsInvalid()" classname="org.example.controller.MutantControllerTest" time="0.317"/>
+  <testcase name="shouldReturnStats()" classname="org.example.controller.MutantControllerTest" time="0.085"/>
+  <testcase name="shouldReturnOk_WhenIsMutant()" classname="org.example.controller.MutantControllerTest" time="0.013"/>
+  <testcase name="shouldReturnForbidden_WhenIsHuman()" classname="org.example.controller.MutantControllerTest" time="0.004"/>
+  <system-out><![CDATA[14:57:56.208 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [org.example.controller.MutantControllerTest]: MutantControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:57:56.406 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration org.example.MutantDetectorApplication for test class org.example.controller.MutantControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.3)
+
+2025-11-26T14:57:56.949-03:00  INFO 252 --- [    Test worker] o.e.controller.MutantControllerTest      : Starting MutantControllerTest using Java 21.0.8 with PID 252 (started by PC in C:\ReposClonadosConGit\ExamenMercado)
+2025-11-26T14:57:56.950-03:00  INFO 252 --- [    Test worker] o.e.controller.MutantControllerTest      : No active profile set, falling back to 1 default profile: "default"
+2025-11-26T14:57:59.406-03:00  INFO 252 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-11-26T14:57:59.407-03:00  INFO 252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-11-26T14:57:59.409-03:00  INFO 252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2025-11-26T14:57:59.443-03:00  INFO 252 --- [    Test worker] o.e.controller.MutantControllerTest      : Started MutantControllerTest in 2.928 seconds (process running for 5.487)
+]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\PC\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.19\154da3a65b4f4a909d3e5bdec55d1b2b4cbb6ce1\byte-buddy-agent-1.14.19.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

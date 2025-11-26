@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MutantDetector.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ExamenMercado</a> &gt; <a href="index.source.html" class="el_package">org.example.service</a> &gt; <span class="el_source">MutantDetector.java</span></div><h1>MutantDetector.java</h1><pre class="source lang-java linenums">package org.example.service;
+
+import org.springframework.stereotype.Component;
+
+@Component
+<span class="fc" id="L6">public class MutantDetector {</span>
+    private static final int SEQUENCE_LENGTH = 4;
+
+    public boolean isMutant(String[] dna) {
+        // --- AGREGA ESTO ---
+<span class="fc bfc" id="L11" title="All 4 branches covered.">        if (dna == null || dna.length == 0) {</span>
+<span class="fc" id="L12">            return false;</span>
+        }
+        // -------------------
+
+<span class="fc" id="L16">        int n = dna.length;</span>
+
+        // --- AGREGA ESTO TAMBIÉN (Validación de matriz cuadrada) ---
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">        if (dna[0] == null) return false; // Evita error si la primera fila es null</span>
+        // -----------------------------------------------------------
+
+        // Optimización 1: Convertir a char[][] para acceso rápido
+<span class="fc" id="L23">        char[][] matrix = new char[n][n];</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        for (int i = 0; i &lt; n; i++) {</span>
+            // Validación extra por seguridad
+<span class="pc bpc" id="L26" title="1 of 4 branches missed.">            if (dna[i] == null || dna[i].length() != n) return false;</span>
+<span class="fc" id="L27">            matrix[i] = dna[i].toCharArray();</span>
+        }
+
+<span class="fc" id="L30">        int sequenceCount = 0;</span>
+
+        // Recorremos la matriz una sola vez
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        for (int row = 0; row &lt; n; row++) {</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            for (int col = 0; col &lt; n; col++) {</span>
+
+                // Optimización 2: Early Termination
+<span class="fc bfc" id="L37" title="All 2 branches covered.">                if (sequenceCount &gt; 1) return true;</span>
+
+                // Chequeo Horizontal
+<span class="fc bfc" id="L40" title="All 2 branches covered.">                if (col &lt;= n - SEQUENCE_LENGTH) {</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">                    if (checkLine(matrix, row, col, 0, 1)) sequenceCount++;</span>
+                }
+
+                // Chequeo Vertical
+<span class="fc bfc" id="L45" title="All 2 branches covered.">                if (row &lt;= n - SEQUENCE_LENGTH) {</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">                    if (checkLine(matrix, row, col, 1, 0)) sequenceCount++;</span>
+                }
+
+                // Chequeo Diagonal (↘)
+<span class="fc bfc" id="L50" title="All 4 branches covered.">                if (row &lt;= n - SEQUENCE_LENGTH &amp;&amp; col &lt;= n - SEQUENCE_LENGTH) {</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">                    if (checkLine(matrix, row, col, 1, 1)) sequenceCount++;</span>
+                }
+
+                // Chequeo Diagonal Inversa (↙)
+<span class="fc bfc" id="L55" title="All 4 branches covered.">                if (row &lt;= n - SEQUENCE_LENGTH &amp;&amp; col &gt;= SEQUENCE_LENGTH - 1) {</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">                    if (checkLine(matrix, row, col, 1, -1)) sequenceCount++;</span>
+                }
+            }
+        }
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        return sequenceCount &gt; 1;</span>
+    }
+
+    private boolean checkLine(char[][] matrix, int row, int col, int dRow, int dCol) {
+<span class="fc" id="L64">        char first = matrix[row][col];</span>
+<span class="pc bpc" id="L65" title="1 of 6 branches missed.">        return matrix[row + dRow][col + dCol] == first &amp;&amp;</span>
+                matrix[row + 2 * dRow][col + 2 * dCol] == first &amp;&amp;
+                matrix[row + 3 * dRow][col + 3 * dCol] == first;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

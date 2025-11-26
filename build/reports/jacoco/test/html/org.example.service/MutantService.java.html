@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MutantService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ExamenMercado</a> &gt; <a href="index.source.html" class="el_package">org.example.service</a> &gt; <span class="el_source">MutantService.java</span></div><h1>MutantService.java</h1><pre class="source lang-java linenums">package org.example.service;
+
+import lombok.RequiredArgsConstructor;
+import org.example.entity.DnaRecord;
+import org.example.repository.DnaRecordRepository;
+import org.springframework.stereotype.Service;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+public class MutantService {
+
+    private final MutantDetector mutantDetector;
+    private final DnaRecordRepository repository;
+
+    public boolean analyze(String[] dna) {
+        // 1. Calcular Hash único del ADN
+<span class="fc" id="L21">        String hash = generateHash(dna);</span>
+
+        // 2. Verificar si ya existe en BD (Caché) [cite: 195]
+<span class="fc" id="L24">        Optional&lt;DnaRecord&gt; existingRecord = repository.findByDnaHash(hash);</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (existingRecord.isPresent()) {</span>
+<span class="fc" id="L26">            return existingRecord.get().isMutant();</span>
+        }
+
+        // 3. Si no existe, analizar
+<span class="fc" id="L30">        boolean isMutant = mutantDetector.isMutant(dna);</span>
+
+        // 4. Guardar resultado
+<span class="fc" id="L33">        repository.save(new DnaRecord(hash, isMutant));</span>
+
+<span class="fc" id="L35">        return isMutant;</span>
+    }
+
+    private String generateHash(String[] dna) {
+        try {
+<span class="fc" id="L40">            MessageDigest digest = MessageDigest.getInstance(&quot;SHA-256&quot;);</span>
+<span class="fc" id="L41">            String combined = String.join(&quot;&quot;, dna);</span>
+<span class="fc" id="L42">            byte[] encodedhash = digest.digest(combined.getBytes(StandardCharsets.UTF_8));</span>
+<span class="fc" id="L43">            StringBuilder hexString = new StringBuilder(2 * encodedhash.length);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            for (byte b : encodedhash) {</span>
+<span class="fc" id="L45">                String hex = Integer.toHexString(0xff &amp; b);</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">                if (hex.length() == 1) hexString.append('0');</span>
+<span class="fc" id="L47">                hexString.append(hex);</span>
+            }
+<span class="fc" id="L49">            return hexString.toString();</span>
+<span class="nc" id="L50">        } catch (NoSuchAlgorithmException e) {</span>
+<span class="nc" id="L51">            throw new RuntimeException(&quot;Error al calcular hash&quot;, e);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
